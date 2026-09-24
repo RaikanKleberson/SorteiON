@@ -1,4 +1,5 @@
 # SorteiON
+<<<<<<< HEAD
 
 > **Sorteios simples, rápidos e transparentes.**
 
@@ -149,3 +150,6 @@ Defina a licença do projeto antes de abrir contribuições externas ou redistri
 **SorteiON**
 
 Sorteios simples, rápidos e transparentes.
+=======
+Sorteador 100% gratuito!
+>>>>>>> 9324b75499c9062655b7ac8d4dee3c670b80698e

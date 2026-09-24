@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SorteiON — sorteios simples, rápidos e transparentes.">
+  <title>SorteiON — Sorteador</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div>
+        <a class="brand" href="./">Sortei<span>ON</span></a>
+        <p class="tagline">Sorteios simples, rápidos e transparentes.</p>
+      </div>
+      <button class="ghost-btn" id="clearAllBtn" type="button" title="Limpar a configuração atual">Limpar</button>
+    </header>
+
+    <section class="hero">
+      <p class="eyebrow">SORTEADOR GRATUITO</p>
+      <h1>Faça seu sorteio<br><span>sem complicação.</span></h1>
+      <p class="hero-copy">
+        Sorteie nomes ou números diretamente no navegador. Sem cadastro e sem depender de servidor para realizar o sorteio.
+      </p>
+    </section>
+
+    <section class="workspace">
+      <div class="panel input-panel">
+        <div class="panel-head">
+          <div>
+            <h2>Participantes</h2>
+            <p>Escolha o tipo do sorteio e prepare sua lista.</p>
+          </div>
+          <span class="count-badge" id="countBadge">0 itens</span>
+        </div>
+
+        <div class="mode-switch" role="tablist" aria-label="Tipo de sorteio">
+          <button class="mode-btn active" id="namesModeBtn" type="button" role="tab" aria-selected="true">Nomes</button>
+          <button class="mode-btn" id="numbersModeBtn" type="button" role="tab" aria-selected="false">Números</button>
+        </div>
+
+        <div id="namesSection">
+          <label class="field-label" for="participants">Digite ou cole os participantes</label>
+          <textarea
+            id="participants"
+            rows="12"
+            placeholder="Um participante por linha&#10;&#10;João&#10;Maria&#10;Carlos&#10;Ana"
+            spellcheck="false"
+          ></textarea>
+
+          <div class="field-row">
+            <button class="secondary-btn" id="removeDuplicatesBtn" type="button">Remover duplicados</button>
+            <label class="file-btn">
+              Importar TXT/CSV
+              <input id="fileInput" type="file" accept=".txt,.csv,text/plain,text/csv">
+            </label>
+          </div>
+
+          <p class="helper-text">Aceita um participante por linha. Em CSV, a primeira coluna é usada.</p>
+        </div>
+
+        <div id="numbersSection" class="hidden">
+          <div class="number-grid">
+            <div>
+              <label class="field-label" for="minNumber">De</label>
+              <input id="minNumber" type="number" value="1">
+            </div>
+            <div>
+              <label class="field-label" for="maxNumber">Até</label>
+              <input id="maxNumber" type="number" value="100">
+            </div>
+          </div>
+          <p class="helper-text">O intervalo é inclusivo. Ex.: 1 até 100 pode sortear qualquer número entre eles.</p>
+        </div>
+
+        <div class="settings-box">
+          <div class="setting">
+            <div>
+              <strong>Quantidade de vencedores</strong>
+              <span>Sem repetir o mesmo vencedor.</span>
+            </div>
+            <input id="winnerCount" class="small-input" type="number" min="1" value="1">
+          </div>
+
+          <label class="check-row">
+            <input id="keepScreen" type="checkbox">
+            <span>Manter resultado na tela após novo sorteio</span>
+          </label>
+        </div>
+
+        <button class="primary-btn" id="drawBtn" type="button">SORTEAR AGORA</button>
+        <p class="privacy-note">Os dados do sorteio permanecem no seu navegador nesta versão.</p>
+      </div>
+
+      <div class="panel result-panel">
+        <div class="panel-head">
+          <div>
+            <h2>Resultado</h2>
+            <p id="resultStatus">Ainda não há sorteio realizado.</p>
+          </div>
+          <button class="ghost-btn" id="presentationBtn" type="button">Modo apresentação</button>
+        </div>
+
+        <div class="result-stage" id="resultStage">
+          <div class="empty-result" id="emptyResult">
+            <div class="empty-icon">🎲</div>
+            <h3>Pronto para sortear?</h3>
+            <p>Adicione os participantes e clique no botão.</p>
+          </div>
+
+          <div class="drawing" id="drawingState" aria-live="polite" hidden>
+            <div class="spinner"></div>
+            <div class="drawing-title">SORTEANDO...</div>
+            <div class="drawing-subtitle">Escolhendo os vencedores</div>
+          </div>
+
+          <div class="winner-area" id="winnerArea" hidden>
+            <div class="winner-kicker">VENCEDOR(ES)</div>
+            <ol class="winner-list" id="winnerList"></ol>
+            <div class="result-actions">
+              <button class="primary-btn compact" id="redrawBtn" type="button">SORTEAR NOVAMENTE</button>
+              <button class="secondary-btn compact" id="copyResultBtn" type="button">COPIAR RESULTADO</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="history-wrap">
+          <div class="history-head">
+            <h3>Últimos sorteios</h3>
+            <button class="text-btn" id="clearHistoryBtn" type="button">Limpar histórico</button>
+          </div>
+          <div class="history-list" id="historyList">
+            <div class="history-empty">Nenhum sorteio realizado ainda.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>SorteiON</span>
+      <span>•</span>
+      <span>Sorteios locais no navegador | Desenvolvido por: Nokaiz Tecnologia</span>
+    </footer>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
